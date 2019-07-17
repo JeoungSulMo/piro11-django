@@ -4,5 +4,6 @@ from django.http import HttpResponse
 # dojo/views.py
 
 
-def mysum(request, x, y=0, z=0):
-    return HttpResponse(int(x)+int(y), int(z))
+def mysum(request, numbers):
+    numbers=sum(map(lambda s: int(s or 0), numbers.split('/')))
+    return HttpResponse(numbers)
