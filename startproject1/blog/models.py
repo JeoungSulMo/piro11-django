@@ -1,4 +1,12 @@
+import re
+from django.forms import ValidationError
+from django.utils import timezone
 from django.db import models
+
+
+def lnglat_validator(value):
+    if not re.match(r'^([+-]?\d+\.?\d*),([+-]?\d+\.?\d*)$', value):
+        raise ValidationError('Invalid LngLat Type')
 
 
 # Create your models here.
@@ -12,6 +20,9 @@ class Post(models.Model):
                              ))
     content = models.TextField(verbose_name='내용')
     tag = models.CharField(max_length=100, blank=True)
+    lnglat = models.CharField(max_length=50, blank=True,
+                              validators=[lnglat_validator],
+                              help_text='경도, 위도 포멧으로 입력')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
