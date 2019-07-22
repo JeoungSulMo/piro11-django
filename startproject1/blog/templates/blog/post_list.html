@@ -1,14 +1,5 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-
+{% extends "blog/layout.html" %}
+{% block content %}
 <h1>Django</h1>
 
 <p>
@@ -19,26 +10,21 @@
     <input type="submit" value="검색">
 </form>
 
-
 <ul>
     {% for post in post_list %}
         <li>
 
         <a href="/blog/{{ post.id }}/">{{ post.title }}</a>
-            {{ post.id }}
-            <small>{{ post.author }}</small>
-            <small>{{ post.updated_at }}</small>
+        {{ post.id }}
+        <small>{{ post.author }}</small>
+        <small>{{ post.updated_at }}</small>
     {% endfor %}
-        </li>
+    </li>
 </ul>
 
-
-
 <p>
-
 <ul>
     <li>http://localhost:8000/로 접속해보세요</li>
 </ul>
 </p>
-</body>
-</html>
+{% endblock %}
