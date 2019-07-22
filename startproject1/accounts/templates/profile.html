@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <h2>{{ user }}'s Profile</h2>
+
+    <ul>
+        <li>{{ user.username }}</li>
+        <li>{{ user.email }}</li>
+        <li>{{ user.date_joined }}</li>
+    </ul>
+
+{% endblock %}
