@@ -12,13 +12,17 @@
 <body>
 <h1>{{ post.title }}</h1>
 {{ post.content | linebreaks }}
+
 <hr>
 <hr>
 {% for comment in post.comment_set.all %}
     <p>{{ comment.message }} ---작성자 : {{ comment.author }}     -----작성 시간 : {{ comment.created_at }}</p>
     <br>
 
+
+
 {% endfor %}
+ <a href="{% url "blog:post_list" %}">목록으로</a>
 </body>
 </html>
 

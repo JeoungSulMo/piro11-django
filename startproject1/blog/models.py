@@ -1,6 +1,8 @@
 import re
 from django.conf import settings
 from django.forms import ValidationError
+from django.shortcuts import resolve_url
+from django.urls import reverse
 from django.utils import timezone
 from django.db import models
 
@@ -8,7 +10,7 @@ from django.db import models
 def lnglat_validator(value):
     if not re.match(r'^([+-]?\d+\.?\d*),([+-]?\d+\.?\d*)$', value):
         raise ValidationError('Invalid LngLat Type')
-
+resolve_url
 
 
 # Create your models here.
@@ -37,6 +39,9 @@ class Post(models.Model):
     tag_set = models.ManyToManyField('Tag', blank=True )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def get_absolute_url(self):
+        return reverse('blog:post_detail', args=[self.id])
 
     class Meta:
         ordering = ['-id']
