@@ -5,6 +5,7 @@
 <p>
     안녕하세요 장공 띠껍습니다.
 </p>
+<img src="" alt="">
 
 <form action="" method="get">
     <input type="text" name="q" value="{{ q }}">
@@ -15,7 +16,7 @@
     {% for post in post_list %}
         <li>
             {{ post.id }}
-            <a href="{% url "blog:post_detail" post.id  %}">{{ post.title }}</a>
+            <a href="{% url 'blog:post_detail' post.id  %}">{{ post.title }}</a>
 
             <small>{{ post.author }}</small>
             <small>{{ post.updated_at }}</small>
