@@ -22,7 +22,8 @@
 
 
 {% endfor %}
- <a href="{% url "blog:post_list" %}">목록으로</a>
+ <a href="{% url 'blog:post_list' %}">목록으로</a><br>
+<a href="{% url 'blog:post_edit' post.id %}">수정하기</a>
 </body>
 </html>
 
