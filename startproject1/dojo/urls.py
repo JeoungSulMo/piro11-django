@@ -24,9 +24,10 @@ app_name = 'dojo'
 # }
 
 urlpatterns = [
-    path('cbv/list1/', views_cbv.post_list1),
+    path('cbv/list1/', views_cbv.post_list1, name="dojo"),
     path('list3/', views.post_list3),
     path('cbv/list2/', views_cbv.post_list2),
+    path('new/', views.post_new),
     # path('cbv/list2/', views_cbv.post_list2),
     # path('cbv/list3/', views_cbv.post_list3),
     # path('cbv/excel/', views_cbv.excel_download),
