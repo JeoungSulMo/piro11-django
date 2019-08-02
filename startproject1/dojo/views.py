@@ -1,6 +1,6 @@
 import os
 from django.conf import settings
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, JsonResponse
 
 # Create your views here.
@@ -54,12 +54,16 @@ def post_new(request):
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)
         if form.is_valid():
-            print(form.cleaned_data)
-            post = Post()
-            post.title = form.cleaned_data['title']
-            post.content = form.cleaned_data['content']
+            # print(form.cleaned_data)
+            # post = Post()
+            # post.title = form.cleaned_data['title']
+            # post.content = form.cleaned_data['content']
+            # post.save()
+            post = form.save(commit=False)
+            post.ip = request.META['REMOTE_ADDR']
             post.save()
             return redirect('dojo:dojo')
+
     else:
         form = PostForm()
     return render(request, 'dojo/post_form.html', {
@@ -67,3 +71,24 @@ def post_new(request):
     })
 
 
+
+def post_edit(request, id):
+    post= get_object_or_404(Post, id=id)
+    if request.method == 'POST':
+        form = PostForm(request.POST, request.FILES, instance=post)
+        if form.is_valid():
+            # print(form.cleaned_data)
+            # post = Post()
+            # post.title = form.cleaned_data['title']
+            # post.content = form.cleaned_data['content']
+            # post.save()
+            post = form.save(commit=False)
+            post.ip = request.META['REMOTE_ADDR']
+            post.save()
+            return redirect('dojo:dojo')
+
+    else:
+        form = PostForm(instance=post)
+    return render(request, 'dojo/post_form.html', {
+        'form': form,
+    })

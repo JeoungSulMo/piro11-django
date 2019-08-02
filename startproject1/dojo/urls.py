@@ -28,6 +28,7 @@ urlpatterns = [
     path('list3/', views.post_list3),
     path('cbv/list2/', views_cbv.post_list2),
     path('new/', views.post_new),
+    path('<int:id>/edit/', views.post_edit),
     # path('cbv/list2/', views_cbv.post_list2),
     # path('cbv/list3/', views_cbv.post_list3),
     # path('cbv/excel/', views_cbv.excel_download),
