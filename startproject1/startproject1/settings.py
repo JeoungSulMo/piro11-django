@@ -43,7 +43,6 @@ INSTALLED_APPS = [
     'blog',
     'dojo',
     'shop',
-    'imagekit',
 ]
 
 MIDDLEWARE = [
@@ -129,4 +128,14 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-INTERNAL_IPS =["127.0.0.1"]
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'startproject1', 'static'),
+]
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+INTERNAL_IPS = ["127.0.0.1"]
+
+MEDIA_URL ='/media/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

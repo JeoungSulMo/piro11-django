@@ -20,7 +20,7 @@ class Post(models.Model):
 
 class GameUser(models.Model):
     server_name = models.CharField(max_length=10,
-                                  choices=[
+                                  choices = [
                                       ('A', 'A서버'),
                                       ('B', 'B서버'),
                                       ('C', 'C서버'),
@@ -30,5 +30,5 @@ class GameUser(models.Model):
     class Meta:
         unique_together = [
             ('server_name', 'username'),
-
         ]
+

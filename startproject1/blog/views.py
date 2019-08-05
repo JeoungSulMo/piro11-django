@@ -31,7 +31,7 @@ def post_new(request):
         form = PostForm(request.POST, request.FILES)
         if form.is_valid():
             post = form.save()
-            return redirect('post_list')
+        return redirect('blog:post_list')
     else:
         form = PostForm()
     return render(request, 'blog/make_post.html', {
@@ -45,7 +45,7 @@ def post_edit(request, id):
         form = PostForm(request.POST, request.FILES, instance=post)
         if form.is_valid():
             post = form.save()
-            return redirect('post_list')
+            return redirect('blog:post_list')
     else:
         form = PostForm(instance=post)
     return render(request, 'blog/make_post.html', {

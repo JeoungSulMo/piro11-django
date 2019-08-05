@@ -34,6 +34,8 @@ class Post(models.Model):
     content = models.TextField(verbose_name='내용')
     tag = models.CharField(max_length=100, blank=True)
 
+    photo = models.ImageField(blank=True)
+
     lnglat = models.CharField(max_length=50, blank=True,
                               validators=[lnglat_validator],
                               help_text='경도, 위도 포멧으로 입력')
@@ -58,7 +60,6 @@ class Comment(models.Model):
     message = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-
 
 class Tag(models.Model):
     name = models.CharField(max_length=50, unique=True)
