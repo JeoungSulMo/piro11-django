@@ -1,3 +1,5 @@
 django-debug-toolbar
 django-extensions
 ipython[notebook]
+pilkit
+django-imagekit
