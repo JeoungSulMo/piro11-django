@@ -11,6 +11,10 @@
 </head>
 <body>
 <h1>{{ post.title }}</h1>
+<br>
+{% if post.photo %}
+    <img src="{{ post.photo_thumbnail.url }}" alt="" style="max-width: 400px"  >
+{% endif %}
 {{ post.content | linebreaks }}
 
 <hr>

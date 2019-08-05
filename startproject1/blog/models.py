@@ -5,7 +5,8 @@ from django.shortcuts import resolve_url
 from django.urls import reverse
 from django.utils import timezone
 from django.db import models
-
+from imagekit.models import ImageSpecField
+from imagekit.processors import Thumbnail
 
 def lnglat_validator(value):
     if not re.match(r'^([+-]?\d+\.?\d*),([+-]?\d+\.?\d*)$', value):
@@ -35,6 +36,11 @@ class Post(models.Model):
     tag = models.CharField(max_length=100, blank=True)
 
     photo = models.ImageField(blank=True)
+    photo_thumbnail = ImageSpecField(source="photo",
+                                     processors=[Thumbnail(300, 300)],
+                                     format='JPEG',
+                                     options={'quality': 60})
+
 
     lnglat = models.CharField(max_length=50, blank=True,
                               validators=[lnglat_validator],
