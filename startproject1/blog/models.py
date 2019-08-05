@@ -5,15 +5,13 @@ from django.shortcuts import resolve_url
 from django.urls import reverse
 from django.utils import timezone
 from django.db import models
-from imagekit.models import ImageSpecField
+from imagekit.models import ImageSpecField, ProcessedImageField
 from imagekit.processors import Thumbnail
+
 
 def lnglat_validator(value):
     if not re.match(r'^([+-]?\d+\.?\d*),([+-]?\d+\.?\d*)$', value):
         raise ValidationError('Invalid LngLat Type')
-
-
-
 
 
 # Create your models here.
@@ -35,12 +33,19 @@ class Post(models.Model):
     content = models.TextField(verbose_name='내용')
     tag = models.CharField(max_length=100, blank=True)
 
-    photo = models.ImageField(blank=True)
-    photo_thumbnail = ImageSpecField(source="photo",
-                                     processors=[Thumbnail(300, 300)],
-                                     format='JPEG',
-                                     options={'quality': 60})
+    # >> ImageSpecField를 이용해 원본 이미지 유지 하면서 썸네일 만들기
 
+    # photo = models.ImageField(blank=True)
+    # photo_thumbnail = ImageSpecField(source="photo",
+    #                                  processors=[Thumbnail(300, 300)],
+    #                                  format='JPEG',
+    #                                  options={'quality': 60})
+
+    # >> 원본 유지 x 바로 만들기
+    photo = ProcessedImageField(blank=True,
+                                processors=[Thumbnail(300, 300)],
+                                format='JPEG',
+                                options={'quality': 60})
 
     lnglat = models.CharField(max_length=50, blank=True,
                               validators=[lnglat_validator],
@@ -66,6 +71,7 @@ class Comment(models.Model):
     message = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
 
 class Tag(models.Model):
     name = models.CharField(max_length=50, unique=True)
